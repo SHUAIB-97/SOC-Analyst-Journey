@@ -67,3 +67,30 @@ I practised listing running processes, identifying a specific process, retrievin
 ---
 **Project type:** Cybersecurity learning and hands-on practice  
 **Career focus:** Entry-level SOC Analyst
+
+## Additional Practical — Process Explorer and Notepad++
+
+### Tool Used
+Microsoft Sysinternals Process Explorer
+
+### Investigation
+I used Process Explorer to inspect running processes. I also used PowerShell to identify the process details for Notepad++.
+
+Command used:
+
+```powershell
+Get-CimInstance Win32_Process -Filter "Name = 'notepad++.exe'" |
+Select-Object ProcessId, ParentProcessId, Name
+```
+
+### Observed Results
+- Process name: `notepad++.exe`
+- Process ID: `7488`
+- Parent Process ID: `7464`
+- Parent process previously identified as: `explorer.exe`
+
+### Observation
+The process information showed that Notepad++ had a parent process ID of `7464`. Process Explorer displayed the process, but access to some detailed properties was denied or unavailable.
+
+### Security Lesson
+Process names, process IDs, parent processes, and command-line details can help analysts investigate program execution. Missing information or access-denied messages do not, by themselves, indicate malicious activity.
